@@ -208,7 +208,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4m-Td-eo3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4m-Td-eo3" userLabel="Score Count Label">
                                 <rect key="frame" x="126.5" y="608.5" width="122" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <nil key="textColor"/>
@@ -227,6 +227,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hu-jm-MTE">
                                         <rect key="frame" x="171.5" y="0.0" width="163.5" height="30"/>
                                         <state key="normal" title="Shuffle"/>
+                                        <connections>
+                                            <action selector="touchShuffle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6IP-FM-a9U"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -246,7 +249,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="flipCountLabel" destination="y4m-Td-eo3" id="1IF-4b-shi"/>
+                        <outlet property="scoreCountLabel" destination="y4m-Td-eo3" id="CFW-lG-HVb"/>
                         <outletCollection property="cardButtons" destination="K6L-9P-WBK" collectionClass="NSMutableArray" id="JeM-B5-a5X"/>
                         <outletCollection property="cardButtons" destination="0Gq-wO-g9n" collectionClass="NSMutableArray" id="z1N-5R-PNm"/>
                         <outletCollection property="cardButtons" destination="3nj-E8-vXX" collectionClass="NSMutableArray" id="YIA-86-UxX"/>
