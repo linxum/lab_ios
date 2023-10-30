@@ -218,17 +218,24 @@
                                 <rect key="frame" x="20" y="558.5" width="335" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oW2-Rn-10V">
-                                        <rect key="frame" x="0.0" y="0.0" width="163.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="106.5" height="30"/>
                                         <state key="normal" title="New Game"/>
                                         <connections>
                                             <action selector="touchNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kih-ko-4ra"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hu-jm-MTE">
-                                        <rect key="frame" x="171.5" y="0.0" width="163.5" height="30"/>
+                                        <rect key="frame" x="114.5" y="0.0" width="106" height="30"/>
                                         <state key="normal" title="Shuffle"/>
                                         <connections>
                                             <action selector="touchShuffle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6IP-FM-a9U"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5F2-7t-HYj">
+                                        <rect key="frame" x="228.5" y="0.0" width="106.5" height="30"/>
+                                        <state key="normal" title="Hint"/>
+                                        <connections>
+                                            <action selector="touchHint:" destination="BYZ-38-t0r" eventType="touchUpInside" id="soE-fo-MoJ"/>
                                         </connections>
                                     </button>
                                 </subviews>
