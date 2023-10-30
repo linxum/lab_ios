@@ -56,17 +56,33 @@ class ViewController: UIViewController {
         game = Concentration(numberOfPairsOfCards: numberOfPairesOfCards)
         scoreCount = 0
         game.shuffleCards()
-        updateViewFromModel()
         hint()
     }
     
     @IBAction func touchShuffle(_ sender: UIButton) {
         game.shuffleCards()
-        updateViewFromModel()
+        updateOnlyFaceUpModel()
     }
     
     @IBAction func touchHint(_ sender: UIButton) {
-        hint()
+        if !game.isHintUsed() {
+            game.startHint()
+            hint()
+        }
+    }
+    
+    private func hint() {
+        for index in cardButtons.indices {
+            let button = cardButtons[index]
+            let card = game.cards[index]
+            if !card.isMatched {
+                button.setTitle(emoji(for: card), for: UIControlState.normal)
+                button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            }
+        }
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
+            self.updateViewFromModel()
+        }
     }
     
     private func updateViewFromModel() {
