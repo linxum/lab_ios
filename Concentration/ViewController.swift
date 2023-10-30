@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         return (cardButtons.count + 1) / 2
     }
     
-    
+    @IBOutlet weak var hintButton: UIButton!
     
     @IBOutlet private var cardButtons: [UIButton]!
     
@@ -80,6 +80,12 @@ class ViewController: UIViewController {
                 button.setTitle("", for: UIControlState.normal)
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
             }
+        }
+        
+        if !game.isHintUsed() {
+            hintButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        } else {
+            hintButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         }
     }
     
