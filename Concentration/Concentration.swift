@@ -12,6 +12,8 @@ struct Concentration {
     
     private (set) var cards = [Card]()
     
+    private var isHint: Bool
+    
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
@@ -58,6 +60,7 @@ struct Concentration {
             let card = Card()
             cards += [card, card]
         }
+        isHint = false
         shuffleCards()
     }
     
@@ -71,5 +74,13 @@ struct Concentration {
         }
         
         cards = shuffledCards
+    }
+    
+    mutating func startHint() {
+        self.isHint = true
+    }
+    
+    func isHintUsed() -> Bool {
+        return isHint
     }
 }
