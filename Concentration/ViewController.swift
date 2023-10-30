@@ -59,5 +59,12 @@ class ViewController: UIViewController {
         }
         return emoji[card.id] ?? "?"
     }
+    
+    @IBAction func touchNewGame(_ sender: UIButton) {
+        game.newGame()
+        flipCount = 0
+        updateViewFromModel()
+    }
+    
 }
 
