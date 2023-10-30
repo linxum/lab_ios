@@ -63,6 +63,14 @@ class ViewController: UIViewController {
         updateViewFromModel()
     }
     
+    @IBAction func touchHint(_ sender: UIButton) {
+//        for index in game.cards.indices {
+//            var card = game.cards[index]
+//            card.isFaceUp = true
+//        }
+//        updateViewFromModel()
+    }
+    
     private func updateViewFromModel() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
