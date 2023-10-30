@@ -52,6 +52,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchNewGame(_ sender: UIButton) {
+        emojiChoices = "🍒🍉🍌🍊🍇🍍🍑🥝🥥🍆🍏🍋🍓🌶🥕🍕"
         game = Concentration(numberOfPairsOfCards: numberOfPairesOfCards)
         scoreCount = 0
         game.shuffleCards()
