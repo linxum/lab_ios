@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     
     @IBAction private func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.index(of: sender) {
-            var result: Int = game.chooseCard(at: cardNumber)
+            let result: Int = game.chooseCard(at: cardNumber)
             updateViewFromModel()
             scoreCount += result
         }
