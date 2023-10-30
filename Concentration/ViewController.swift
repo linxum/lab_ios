@@ -56,6 +56,7 @@ class ViewController: UIViewController {
         scoreCount = 0
         game.shuffleCards()
         updateViewFromModel()
+        hint()
     }
     
     @IBAction func touchShuffle(_ sender: UIButton) {
@@ -64,11 +65,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchHint(_ sender: UIButton) {
-//        for index in game.cards.indices {
-//            var card = game.cards[index]
-//            card.isFaceUp = true
-//        }
-//        updateViewFromModel()
+        hint()
     }
     
     private func updateViewFromModel() {
@@ -82,6 +79,20 @@ class ViewController: UIViewController {
                 button.setTitle("", for: UIControlState.normal)
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
             }
+        }
+    }
+    
+    private func hint() {
+        for index in cardButtons.indices {
+            let button = cardButtons[index]
+            let card = game.cards[index]
+            if !card.isMatched {
+                button.setTitle(emoji(for: card), for: UIControlState.normal)
+                button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            }
+        }
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
+            self.updateViewFromModel()
         }
     }
     
