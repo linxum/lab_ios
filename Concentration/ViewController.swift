@@ -92,6 +92,12 @@ class ViewController: UIViewController {
             if card.isFaceUp {
                 button.setTitle(emoji(for: card), for: UIControlState.normal)
                 button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                if card.isMatched {
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
+                        button.setTitle("", for: UIControlState.normal)
+                        button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+                    }
+                }
             } else {
                 button.setTitle("", for: UIControlState.normal)
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
@@ -105,17 +111,18 @@ class ViewController: UIViewController {
         }
     }
     
-    private func hint() {
+    private func updateOnlyFaceUpModel() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
-            if !card.isMatched {
-                button.setTitle(emoji(for: card), for: UIControlState.normal)
-                button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            }
+            button.setTitle("", for: UIControlState.normal)
+            button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
         }
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
-            self.updateViewFromModel()
+        
+        if !game.isHintUsed() {
+            hintButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        } else {
+            hintButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         }
     }
     
