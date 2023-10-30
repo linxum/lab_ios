@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var flipCountLabel: UILabel!
     
-    var emojiChoices = ["🍒", "🍉", "🍌", "🍊", "🍇", "🍍", "🍑", "🥝"]
+    var emojiChoices = ["🍒", "🍉", "🍌", "🍊", "🍇", "🍍", "🍑", "🥝", "🥥", "🍆", "🍏", "🍋", "🍓", "🌶", "🥕", "🍔", "🍟", "🍕"]
     
     var emoji = Dictionary<Int, String>()
     
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
                 button.backgroundColor = UIColor.white
             } else {
                 button.setTitle("", for: UIControlState.normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
             }
         }
     }
