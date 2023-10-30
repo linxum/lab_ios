@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ALr-92-Ve1">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ALr-92-Ve1" userLabel="Stack View Card">
                                 <rect key="frame" x="20" y="40" width="335" height="144"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-a2-Z8x">
@@ -214,15 +214,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="T5J-q0-0bs" userLabel="Stack View Menu">
+                                <rect key="frame" x="20" y="558.5" width="335" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oW2-Rn-10V">
+                                        <rect key="frame" x="0.0" y="0.0" width="163.5" height="30"/>
+                                        <state key="normal" title="New Game"/>
+                                        <connections>
+                                            <action selector="touchNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kih-ko-4ra"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hu-jm-MTE">
+                                        <rect key="frame" x="171.5" y="0.0" width="163.5" height="30"/>
+                                        <state key="normal" title="Shuffle"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="T5J-q0-0bs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="23j-er-G7q"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="y4m-Td-eo3" secondAttribute="bottom" constant="20" id="L6P-xw-Hix"/>
                             <constraint firstItem="ALr-92-Ve1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Ry6-Ez-Omm"/>
                             <constraint firstItem="y4m-Td-eo3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ALr-92-Ve1" secondAttribute="bottom" constant="8" symbolic="YES" id="fkg-bs-aO0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ALr-92-Ve1" secondAttribute="trailing" constant="20" id="gBt-0B-rGz"/>
                             <constraint firstItem="y4m-Td-eo3" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lnU-EC-0qH"/>
                             <constraint firstItem="ALr-92-Ve1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="nqE-xQ-pVW"/>
+                            <constraint firstItem="y4m-Td-eo3" firstAttribute="top" secondItem="T5J-q0-0bs" secondAttribute="bottom" constant="20" id="uha-gA-2UV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T5J-q0-0bs" secondAttribute="trailing" constant="20" id="y2d-S7-fi8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
