@@ -12,9 +12,9 @@ class ViewController: UIViewController {
    
     private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairesOfCards)
     
-    private (set) var flipCount = 0 {
+    private (set) var scoreCount = 0 {
         didSet {
-            flipCountLabel.text = "Score: \(flipCount)"
+            scoreCountLabel.text = "Score: \(scoreCount)"
         }
     }
     
@@ -24,14 +24,13 @@ class ViewController: UIViewController {
     
     @IBOutlet private var cardButtons: [UIButton]!
     
-    @IBOutlet private weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var scoreCountLabel: UILabel!
     
     private var emojiChoices = ["🍒", "🍉", "🍌", "🍊", "🍇", "🍍", "🍑", "🥝", "🥥", "🍆", "🍏", "🍋", "🍓", "🌶", "🥕", "🍔", "🍟", "🍕"]
     
     private var emoji = Dictionary<Int, String>()
     
     @IBAction private func touchCard(_ sender: UIButton) {
-        flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -61,10 +60,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchNewGame(_ sender: UIButton) {
-        game.newGame()
-        flipCount = 0
+        game = Concentration(numberOfPairsOfCards: numberOfPairesOfCards)
+        scoreCount = 0
+        game.shuffleCards()
         updateViewFromModel()
     }
     
+    @IBAction func touchShuffle(_ sender: UIButton) {
+        game.shuffleCards()
+    }
 }
 
