@@ -43,6 +43,8 @@ class ViewController: UIViewController {
     
     @IBOutlet private var cardButtons: [UIButton]!
     
+    @IBOutlet weak var stackSettings: UIStackView!
+    
     @IBAction private func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.index(of: sender) {
             let result: Int = game.chooseCard(at: cardNumber)
@@ -84,6 +86,15 @@ class ViewController: UIViewController {
             self.updateViewFromModel()
         }
     }
+    
+    @IBAction func touchSettings(_ sender: UIButton) {
+        if stackSettings.isHidden {
+            stackSettings.isHidden = false
+        } else {
+            stackSettings.isHidden = true 
+        }
+    }
+    
     
     private func updateViewFromModel() {
         for index in cardButtons.indices {
