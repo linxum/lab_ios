@@ -45,7 +45,7 @@ struct Concentration {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                     result += 1
-                } else { result -= 2}
+                } else { result -= 2 }
                 cards[index].isFaceUp = true
             } else {
                 indexOfOneAndOnlyFaceUpCard = index

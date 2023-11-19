@@ -10,13 +10,20 @@ import UIKit
 
 class ViewController: UIViewController {
    
-    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairesOfCards)
-    
+    private lazy var game = Concentration(numberOfPairsOfCards: (currentDiff+1)/2)
     private (set) var scoreCount = 0 {
         didSet {
             updateFlipCountLabel()
         }
     }
+    private var currentTheme = 0
+    private var currentDiff = 16
+    private lazy var emojiChoices = themes[currentTheme]
+    let themes = [
+        "🍒🍉🍌🍊🍇🍑🥝🍏🍋🍓🌶🍕",
+        "🐶🐱🦊🐴🐼🐨🦁🐷🦆🦄🦉🦇",
+        "🇷🇺🇺🇦🇧🇾🇰🇿🇹🇲🇺🇿🇹🇯🇰🇬🇦🇿🇦🇲🇬🇪🇲🇩"
+    ]
     
     private func updateFlipCountLabel() {
         let attr: [NSAttributedStringKey: Any] = [
@@ -33,16 +40,8 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    
-    var numberOfPairesOfCards: Int {
-        return (cardButtons.count + 1) / 2
-    }
-    
     @IBOutlet weak var hintButton: UIButton!
-    
     @IBOutlet private var cardButtons: [UIButton]!
-    
     @IBOutlet weak var stackSettings: UIStackView!
     
     @IBAction private func touchCard(_ sender: UIButton) {
@@ -54,16 +53,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchNewGame(_ sender: UIButton) {
-        emojiChoices = "🍒🍉🍌🍊🍇🍍🍑🥝🥥🍆🍏🍋🍓🌶🥕🍕"
-        game = Concentration(numberOfPairsOfCards: numberOfPairesOfCards)
+        game = Concentration(numberOfPairsOfCards: (currentDiff+1)/2)
         scoreCount = 0
+        if currentTheme == 3 {
+            emojiChoices = themes[2.arc4random]
+        } else {
+            emojiChoices = themes[currentTheme]
+        }
         game.shuffleCards()
         hint()
     }
     
     @IBAction func touchShuffle(_ sender: UIButton) {
         game.shuffleCards()
-        updateOnlyFaceUpModel()
+        updateViewFromModel()
     }
     
     @IBAction func touchHint(_ sender: UIButton) {
@@ -88,15 +91,57 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchSettings(_ sender: UIButton) {
-        if stackSettings.isHidden {
-            stackSettings.isHidden = false
+        stackSettings.isHidden = !stackSettings.isHidden
+        if !stackSettings.isHidden {
+            sender.setTitleColor(#colorLiteral(red: 0, green: 0.4117647059, blue: 0.8509803922, alpha: 1), for: UIControlState.normal)
         } else {
-            stackSettings.isHidden = true 
+            sender.setTitleColor(#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), for: UIControlState.normal)
         }
     }
     
+    @IBAction func touchTheme(_ sender: UIButton) {
+        switch(sender.titleLabel!.text!){
+        case "Theme":
+            sender.setTitle("Animals", for: UIControlState.normal)
+            currentTheme = 1
+        case "Food":
+            sender.setTitle("Animals", for: UIControlState.normal)
+            currentTheme = 1
+        case "Animals":
+            sender.setTitle("Flags", for: UIControlState.normal)
+            currentTheme = 2
+        case "Flags":
+            sender.setTitle("Random", for: UIControlState.normal)
+            currentTheme = 3
+        case "Random":
+            sender.setTitle("Food", for: UIControlState.normal)
+            currentTheme = 0
+        default:
+            break
+        }
+    }
+    
+    @IBAction func touchDifficulty(_ sender: UIButton) {
+        switch sender.titleLabel!.text! {
+        case "Difficulty":
+            sender.setTitle("Über", for: UIControlState.normal)
+            currentDiff = 24
+        case "Über":
+            sender.setTitle("Easy", for: UIControlState.normal)
+            currentDiff = 12
+        case "Easy":
+            sender.setTitle("Normal", for: UIControlState.normal)
+            currentDiff = 16
+        case "Normal":
+            sender.setTitle("Über", for: UIControlState.normal)
+            currentDiff = 24
+        default:
+            break
+        }
+    }
     
     private func updateViewFromModel() {
+        var ind: Int = -1
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
@@ -107,6 +152,15 @@ class ViewController: UIViewController {
                     Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
                         button.setTitle("", for: UIControlState.normal)
                         button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+                    }
+                } else if ind == -1 {
+                    ind = index
+                } else {
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
+                        button.setTitle("", for: UIControlState.normal)
+                        button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+                        self.cardButtons[ind].setTitle("", for: UIControlState.normal)
+                        self.cardButtons[ind].backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
                     }
                 }
             } else {
@@ -121,23 +175,6 @@ class ViewController: UIViewController {
             hintButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         }
     }
-    
-    private func updateOnlyFaceUpModel() {
-        for index in cardButtons.indices {
-            let button = cardButtons[index]
-            let card = game.cards[index]
-            button.setTitle("", for: UIControlState.normal)
-            button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
-        }
-        
-        if !game.isHintUsed() {
-            hintButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-        } else {
-            hintButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }
-    }
-    
-    private var emojiChoices = "🍒🍉🍌🍊🍇🍍🍑🥝🥥🍆🍏🍋🍓🌶🥕🍕🥃🍸🍷"
     
     private var emoji = [Card: String]()
     
