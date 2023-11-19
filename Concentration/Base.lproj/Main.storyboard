@@ -299,10 +299,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdX-7P-lsd">
                                         <rect key="frame" x="0.0" y="0.0" width="163.5" height="30"/>
                                         <state key="normal" title="Difficulty"/>
+                                        <connections>
+                                            <action selector="touchDifficulty:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jz5-ts-1iZ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgv-9m-ZLX">
                                         <rect key="frame" x="171.5" y="0.0" width="163.5" height="30"/>
                                         <state key="normal" title="Theme"/>
+                                        <connections>
+                                            <action selector="touchTheme:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Dt-HS-12Q"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
