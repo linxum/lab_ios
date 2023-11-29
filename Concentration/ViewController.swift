@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         }
     }
     private var currentTheme = 0
-    private var currentDiff = 16
+    private var currentDiff = 24
     private lazy var emojiChoices = themes[currentTheme]
     let themes = [
         "🍒🍉🍌🍊🍇🍑🥝🍏🍋🍓🌶🍕",
@@ -44,6 +44,10 @@ class ViewController: UIViewController {
     @IBOutlet private var cardButtons: [UIButton]!
     @IBOutlet weak var stackSettings: UIStackView!
     
+    private var visibleCardButtons: [UIButton] {
+        return cardButtons.filter{ !$0.isHidden }
+    }
+    
     @IBAction private func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.index(of: sender) {
             let result: Int = game.chooseCard(at: cardNumber)
@@ -63,6 +67,7 @@ class ViewController: UIViewController {
         game.shuffleCards()
         hint()
     }
+
     
     @IBAction func touchShuffle(_ sender: UIButton) {
         game.shuffleCards()
@@ -77,7 +82,11 @@ class ViewController: UIViewController {
     }
     
     private func hint() {
-        for index in cardButtons.indices {
+        for index in visibleCardButtons.indices {
+            guard index < game.cards.count else {
+                print("out")
+                continue
+            }
             let button = cardButtons[index]
             let card = game.cards[index]
             if !card.isMatched {
@@ -124,9 +133,6 @@ class ViewController: UIViewController {
     @IBAction func touchDifficulty(_ sender: UIButton) {
         switch sender.titleLabel!.text! {
         case "Difficulty":
-            sender.setTitle("Über", for: UIControlState.normal)
-            currentDiff = 24
-        case "Über":
             sender.setTitle("Easy", for: UIControlState.normal)
             currentDiff = 12
         case "Easy":
@@ -135,14 +141,26 @@ class ViewController: UIViewController {
         case "Normal":
             sender.setTitle("Über", for: UIControlState.normal)
             currentDiff = 24
+        case "Über":
+            sender.setTitle("Easy", for: UIControlState.normal)
+            currentDiff = 12
         default:
             break
         }
+        
+        for (index, button) in cardButtons.enumerated() {
+            button.isHidden = index >= currentDiff
+        }
+        
     }
     
     private func updateViewFromModel() {
         var ind: Int = -1
-        for index in cardButtons.indices {
+        for index in visibleCardButtons.indices {
+            guard index < game.cards.count else {
+                print("out")
+                continue
+            }
             let button = cardButtons[index]
             let card = game.cards[index]
             if card.isFaceUp {
