@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Concentration
 //
-//  Created by Дебилы Entertainment on 03.10.2023.
-//  Copyright © 2023 Дебилы Entertainment. All rights reserved.
+//  Created by Debils Entertainment on 03.10.2023.
+//  Copyright © 2023 Debils Entertainment. All rights reserved.
 //
 
 import UIKit
@@ -89,44 +89,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchTheme(_ sender: UIButton) {
-        switch(sender.titleLabel!.text!){
-        case "Theme":
-            sender.setTitle("Animals", for: UIControlState.normal)
-            currentTheme = 1
-        case "Food":
-            sender.setTitle("Animals", for: UIControlState.normal)
-            currentTheme = 1
-        case "Animals":
-            sender.setTitle("Flags", for: UIControlState.normal)
-            currentTheme = 2
-        case "Flags":
-            sender.setTitle("Random", for: UIControlState.normal)
-            currentTheme = 3
-        case "Random":
-            sender.setTitle("Food", for: UIControlState.normal)
-            currentTheme = 0
-        default:
-            break
-        }
+        var ThemesDictionary: [Int:String] = [0:"Food", 1:"Animals", 2:"Flags", 3:"Random"]
+        currentTheme = (currentTheme + 1) % ThemesDictionary.count
+        sender.setTitle(ThemesDictionary[currentTheme], for: UIControlState.normal)
     }
     
     @IBAction func touchDifficulty(_ sender: UIButton) {
-        switch sender.titleLabel!.text! {
-        case "Difficulty":
-            sender.setTitle("Easy", for: UIControlState.normal)
-            currentDiff = 12
-        case "Easy":
-            sender.setTitle("Normal", for: UIControlState.normal)
-            currentDiff = 16
-        case "Normal":
-            sender.setTitle("Über", for: UIControlState.normal)
-            currentDiff = 24
-        case "Über":
-            sender.setTitle("Easy", for: UIControlState.normal)
-            currentDiff = 12
-        default:
-            break
-        }
+        var DiffDictionary: [Int:String] = [12:"Can I play, Daddy?", 16:"Don't hurt me.", 20:"Bring 'em on!", 24:"Über"]
+        currentDiff = (currentDiff + 4) != 28 ? currentDiff + 4 : 12
+        sender.setTitle(DiffDictionary[currentDiff], for: UIControlState.normal)
     }
     
     private func updateViewFromModel() {
@@ -145,7 +116,7 @@ class ViewController: UIViewController {
                 } else if ind == -1 {
                     ind = index
                 } else {
-                    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
+                    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { timer in
                         button.setTitle("", for: UIControlState.normal)
                         button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
                         self.cardButtons[ind].setTitle("", for: UIControlState.normal)

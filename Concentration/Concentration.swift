@@ -2,8 +2,8 @@
 //  Concentration.swift
 //  Concentration
 //
-//  Created by Дебилы Entertainment on 23.10.2023.
-//  Copyright © 2023 Дебилы Entertainment. All rights reserved.
+//  Created by Debils Entertainment on 23.10.2023.
+//  Copyright © 2023 Debils Entertainment. All rights reserved.
 //
 
 import Foundation
@@ -38,7 +38,7 @@ struct Concentration {
     
     mutating func chooseCard(at index: Int) -> Int {
         var result = 0
-        assert(cards.indices.contains(index), "Concentration.chooseCard(at:\(index)):choosen index not in the cards")
+        assert(cards.indices.contains(index), "Concentration.chooseCard(at:\(index)):chosen index not in the cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 if cards[matchIndex] == cards[index] {
